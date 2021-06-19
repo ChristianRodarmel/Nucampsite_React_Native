@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Home from './HomeComponent';
 import Directory from './DirectoryComponent';
 import CampsiteInfo from './CampsiteInfoComponent';
-import { Constants } from 'expo-constants';
+import Constants from 'expo-constants';
 import { View, Platform } from 'react-native';
 
 import { createStackNavigator } from 'react-navigation-stack';
@@ -30,7 +30,7 @@ const DirectoryNavigator = createStackNavigator(
 
 const HomeNavigator = createStackNavigator(
     {
-        Home: { screen: Directory },
+        Home: { screen: Home },
     },
     {
         defaultNavigationOptions: {
@@ -64,11 +64,9 @@ class Main extends Component {
             <View
                  style={{
                      flex: 1,
-                     paddingTop: Platform.OS === 'ios' ? 0: Constants.statusBarHeight
-                }}
-            >
+                     paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+                }}>
                 <AppNavigator />
-
             </View>
         );
     }
