@@ -115,18 +115,18 @@ const ContactNavigator = createStackNavigator(
 const customDrawerContentComponent = props => (
     <ScrollView>
         <SafeAreaView
-            style={style.container}
+            style={styles.container}
             forceInset={{top: 'always', horizontal: 'never'}}
         >
-            <View style={styleSheets.drawerHeader}>
+            <View style={styles.drawerHeader}>
                 <View style={{flex: 1}}>
                     <Image
                         source={require('./images/logo.png')}
-                        style={styleSheets.drawerImage}
+                        style={styles.drawerImage}
                     />
                 </View>
                 <View style={{flex: 2}}>
-                    <Text style={style.drawerHeaderText}>NuCamp</Text>
+                    <Text style={styles.drawerHeaderText}>NuCamp</Text>
                 </View>
             </View>
             <DrawerItems {...props} />
