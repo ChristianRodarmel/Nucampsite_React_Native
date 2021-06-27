@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Card } from 'react-native-elements';
 import { connect } from 'react-redux';
-import  { baseUrl } from '../shared/baseUrl';
+import  { baseUrl } from 'shared/baseURL.js';
 import Loading from './LoadingComponent';
 
 const mapStateToProps = state => {

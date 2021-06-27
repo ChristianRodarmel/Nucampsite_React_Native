@@ -5,14 +5,13 @@ import CampsiteInfo from './CampsiteInfoComponent';
 import Constants from 'expo-constants';
 import About from './AboutComponent';
 import Contact from './ContactComponent';
-import Reservtaion from './ReservationComponent';
+import Reservation from './ReservationComponent';
 import { View, Platform, StyleSheet, Text, ScrollView, Image } from 'react-native';
 
 import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator, DrawerItems } from 'react-navigation-drawer';
 import { createAppContainer } from 'react-navigation';
 import { Icon } from 'react-native-elements';
-import { styleSheets } from 'min-document';
 import SafeAreaView from 'react-native-safe-area-view';
 import { connect } from 'react-redux';
 import { fetchCampsites, fetchComments, fetchPromotions, fetchPartners } from '../redux/ActionCreators';
@@ -32,7 +31,7 @@ const DirectoryNavigator = createStackNavigator(
                     headerLeft: <Icon
                     name='list'
                     type='font-awesome'
-                    iconStyle={styleSheets.stackIcon}
+                    iconStyle={styles.stackIcon}
                     onPress={() => navigation.toggleDrawer()}
                 />
             })
@@ -69,7 +68,7 @@ const HomeNavigator = createStackNavigator(
             headerLeft: <Icon
                 name='home'
                 type='font-awesome'
-                iconStyle={styleSheets.stackIcon}
+                iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
             />
         })
@@ -92,7 +91,7 @@ const AboutNavigator = createStackNavigator(
             headerLeft: <Icon
                 name='info-circle'
                 type='font-awesome'
-                iconStyle={styleSheets.stackIcon}
+                iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
             />
         })
@@ -115,7 +114,7 @@ const ContactNavigator = createStackNavigator(
             headerLeft: <Icon
                 name='address-card'
                 type='font-awesome'
-                iconStyle={styleSheets.stackIcon}
+                iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
             />
         })
@@ -138,14 +137,14 @@ const ReservationNavigator = createStackNavigator(
             headerLeft: <Icon
                 name='tree'
                 type='font-awesome'
-                iconStyle={styleSheets.stackIcon}
+                iconStyle={styles.stackIcon}
                 onPress={() => navigation.toggleDrawer()}
             />
         })
     }
 );
 
-const customDrawerContentComponent = props => (
+const CustomDrawerContentComponent = props => (
     <ScrollView>
         <SafeAreaView
             style={styles.container}
@@ -201,7 +200,7 @@ const MainNavigator = createDrawerNavigator(
                 drawerLabel: 'Reserve Campsite',
                 drawerIcon: ({tintColor}) => (
                     <Icon
-                        name='list'
+                        name='tree'
                         type='font-awesome'
                         size={24}
                         color={tintColor}
@@ -297,4 +296,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default connect(null, mapDispatchtoProps)(Main);
+export default connect(null, mapDispatchToProps)(Main);
