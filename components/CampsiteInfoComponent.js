@@ -38,7 +38,7 @@ function RenderCampsite(props) {
             if (recognizeDrag(gestureState)) {
                 Alert.alert(
                     'Add Favorite',
-                    'Are you sure ytou wish to add ' + campsite.name + ' to favorites?',
+                    'Are you sure you wish to add ' + campsite.name + ' to favorites?',
                     [
                         {
                             text: 'Cancel',
