@@ -26,6 +26,7 @@ function RenderCampsite(props) {
     const view = React.createRef();
 
     const recognizeDrag = ({dx}) => (dx < -200) ? true : false;
+    const recognizeComment = ({dx}) => (dx > 200) ? true : false;
 
     const panResponder = PanResponder.create({
         onStartShouldSetPanResponder: () => true,
@@ -33,6 +34,7 @@ function RenderCampsite(props) {
             view.current.rubberBand(1000)
             .then(endState => console.log(endState.finished ? 'finished' : 'canceled'));
         },
+        // React Native = gestureState only has state exist as long as there's 1 touch on screen
         onPanResponderEnd: (e, gestureState) => {
             console.log('pan responder end', gestureState);
             if (recognizeDrag(gestureState)) {
@@ -53,6 +55,8 @@ function RenderCampsite(props) {
                     ],
                     { cancelable: false }
                 );
+            } else if (recognizeComment(gestureState)) {
+                props.onShowModal();
             }
             return true;
         }
