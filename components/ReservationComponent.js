@@ -149,7 +149,7 @@ class Reservation extends Component {
             </ScrollView>
         );
     }
-
+}
 const styles = StyleSheet.create({
     formRow: {
         alignItems: 'center',

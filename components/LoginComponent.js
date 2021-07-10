@@ -6,6 +6,9 @@ import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { baseUrl } from '../shared/baseUrl';
+import * as ImageManipulator from 'expo-image-manipulator';
+import * as MediaLibrary from 'expo-media-library';
+
 
 class LoginTab extends Component {
 
@@ -104,7 +107,7 @@ class LoginTab extends Component {
                 </View>
                 <View style={styles.formButton}>
                     <Button
-                        onPress={() => this.navigation.navigate('Register')}
+                        onPress={() => this.props.navigation.navigate('Register')}
                         title='Register'
                         type='clear'
                         icon={
@@ -161,10 +164,38 @@ class RegisterTab extends Component{
             });
             if (!capturedImage.cancelled) {
                 console.log(capturedImage);
-                this.setState({imageUrl: capturedImage.uri});
+                this.processImage(capturedImage.uri);
+                MediaLibrary.saveToLibraryAsync(capturedImage.uri);
             }
         }
     }
+
+    processImage = async (imgUri) => {
+        const processedImage = await ImageManipulator.manipulateAsync(
+                    imgUri,
+                  [{resize: {width: 400}}],
+                  { format: 'png' }
+                );
+                console.log(processedImage);
+                this.setState({imageUrl: processedImage.uri});
+              };
+
+    getImageFromGallery = async () => {
+    const cameraPermission = await Permissions.askAsync(Permissions.CAMERA);
+    const cameraRollPermission = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+
+    if (cameraPermission.status === 'granted' && cameraRollPermission.status === 'granted') {
+        const capturedImage = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            aspect: [1, 1]
+        });
+        if (!capturedImage.cancelled) {
+            this.processImage(capturedImage.uri);
+            console.log(capturedImage);
+        }
+    }
+}
+    
 
     handleRegister() {
         console.log(JSON.stringify(this.state));
@@ -196,6 +227,10 @@ class RegisterTab extends Component{
                         <Button
                             title='Camera'
                             onPress={this.getImageFromCamera}
+                        />
+                        <Button
+                            title='Gallery'
+                            onPress={this.getImageFromGallery}
                         />
                     </View>
                     <Input
